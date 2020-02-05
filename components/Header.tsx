@@ -1,4 +1,7 @@
-const Header = () => (
+import { withRouter } from "next/router";
+import Link from "next/link";
+
+const Header = ({ router }) => (
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div className="container">
       <a className="navbar-brand" href="#">
@@ -17,11 +20,22 @@ const Header = () => (
       </button>
       <div className="collapse navbar-collapse" id="navbarResponsive">
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Home
-              <span className="sr-only">(current)</span>
-            </a>
+          <li className={`nav-item ${router.pathname === "/" ? "active" : ""}`}>
+            <Link href={"/"}>
+              <a className="nav-link">
+                Home
+                <span className="sr-only">(current)</span>
+              </a>
+            </Link>
+          </li>
+          <li
+            className={`nav-item ${
+              router.pathname === "/create" ? "active" : ""
+            }`}
+          >
+            <Link href={"/create"}>
+              <a className="nav-link">Create</a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -29,4 +43,4 @@ const Header = () => (
   </nav>
 );
 
-export default Header;
+export default withRouter(Header);
