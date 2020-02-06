@@ -2,8 +2,8 @@ import micro from "micro";
 import { get, post, router, withNamespace } from "microrouter";
 import next from "next";
 import mongoose from "mongoose";
-import postsApi from "./apis/posts";
-import slugsApi from "./apis/slugs";
+import postsController from "./controllers/posts";
+import slugsController from "./controllers/slugs";
 
 require("dotenv").config();
 
@@ -20,13 +20,13 @@ export const nextApplication = next({
 export const httpServer = micro(
   router(
     withNamespace("/api/posts")(
-      get("/", postsApi.getAll),
-      get("/:id", postsApi.getById),
-      post("/", postsApi.create)
+      get("/", postsController.getAll),
+      get("/:id", postsController.getById),
+      post("/", postsController.create)
     ),
     withNamespace("/api/slugs")(
-      get("/", slugsApi.getAll),
-      post("/", slugsApi.create)
+      get("/", slugsController.getAll),
+      post("/", slugsController.create)
     ),
     get("/*", nextApplication.getRequestHandler())
   )
