@@ -9,7 +9,7 @@ export const getPost = async (id: string) => {
 };
 
 export const getPosts = async () => {
-  const res = await fetch("http://localhost:3000/api/posts");
+  const res = await fetch(`${baseApiUrl}/posts`);
   return res.json();
 };
 
