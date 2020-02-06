@@ -14,7 +14,7 @@ function Post({ post }) {
       <div className="card-body">
         <h2 className="card-title">{post.title}</h2>
         <p className="card-text">{post.body}</p>
-        <Link href={`/posts/${post._id}`}>
+        <Link as={`/posts/${post._id}`} href="/posts/[id]">
           <a className="btn btn-primary">Read More &rarr;</a>
         </Link>
       </div>
