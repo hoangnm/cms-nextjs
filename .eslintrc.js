@@ -11,6 +11,7 @@ module.exports = {
     sourceType: "module" // Allows for the use of imports
   },
   rules: {
+    "no-underscore-dangle": "off",
     "no-console": "warn",
     "no-await-in-loop": "warn",
     "@typescript-eslint/explicit-function-return-type": "off",

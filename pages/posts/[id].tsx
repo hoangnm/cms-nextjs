@@ -1,25 +1,26 @@
+import React from "react";
 import Header from "../../components/Header";
 import { getPost } from "../../apis/cms";
 
-function PostTitle({ title }) {
+const PostTitle = ({ title }) => {
   return <h1 className="mt-4">{title}</h1>;
-}
+};
 
-function PostAuthor({ author }) {
+const PostAuthor = ({ author }) => {
   return (
     <p className="lead">
       by <a href="#">{author}</a>
     </p>
   );
-}
+};
 
-function PostTime({ time }) {
+const PostTime = ({ time }) => {
   return <p>Posted on {new Date(time).toLocaleDateString()}</p>;
-}
+};
 
-function PostContent({ content }) {
+const PostContent = ({ content }) => {
   return <p className="lead">{content}</p>;
-}
+};
 
 const Slugs = ({ slugs = [] }) => {
   return (
@@ -48,7 +49,7 @@ const Post = ({ post }) => {
   );
 };
 
-Post.getInitialProps = async function(context) {
+Post.getInitialProps = async context => {
   const { id } = context.query;
   const post = await getPost(id);
 

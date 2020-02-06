@@ -1,15 +1,12 @@
+import React from "react";
 import Link from "next/link";
-import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import Header from "../components/Header";
+import { getPosts } from "../apis/cms";
 
-function fetcher(url) {
-  return fetch(url).then(r => r.json());
-}
-
-function DateText({ date }) {
+const DateText = ({ date }) => {
   return <span>{new Date(date).toLocaleDateString()}</span>;
-}
+};
 
 function Post({ post }) {
   return (
@@ -28,19 +25,16 @@ function Post({ post }) {
   );
 }
 
-function Posts({ posts }) {
+const Posts = ({ posts }) => {
   return posts.map(item => (
     <div className="mb-4" key={item._id}>
       <Post post={item} />
     </div>
   ));
-}
+};
 
 export default function Index() {
-  const { data = [], error } = useSWR(
-    "http://localhost:3000/api/posts",
-    fetcher
-  );
+  const { data = [] } = useSWR("fetch-post", getPosts);
 
   return (
     <div>

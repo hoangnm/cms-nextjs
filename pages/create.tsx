@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import { Formik, Field, useField } from "formik";
 import Header from "../components/Header";
 import Tags from "../components/Tags";
@@ -65,15 +64,7 @@ const CreatePost = () => {
                     setSubmitting(false);
                   }}
                 >
-                  {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting
-                  }) => (
+                  {({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
                       <div className="form-group">
                         <label htmlFor="title">Title</label>
