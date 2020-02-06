@@ -7,7 +7,7 @@
 npm install
 ```
 ### Run in dev mode
-Before running app in dev mode, please make sure mongodb is running in localhost. set DB_HOST=localhost in .env file then run
+Before running app in dev mode, please make sure mongodb is running in localhost. Set DB_HOST=localhost in .env file then run
 
 ```bash
 npm run start:dev
