@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../../components/Header";
-import { getPost } from "../../apis/cms";
+import Header from "../../client/components/Header";
+import { getPost } from "../../client/apis/cms";
 
 const PostTitle = ({ title }) => {
   return <h1 className="mt-4">{title}</h1>;

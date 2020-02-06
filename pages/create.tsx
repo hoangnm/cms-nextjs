@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Field, useField } from "formik";
-import Header from "../components/Header";
-import Tags from "../components/Tags";
-import { createPost, createSlug, getSlugs } from "../apis/cms";
+import Header from "../client/components/Header";
+import Tags from "../client/components/Tags";
+import { createPost, createSlug, getSlugs } from "../client/apis/cms";
 
 const TagsField = ({ name }) => {
   const [suggestions, setSuggestions] = useState([]);

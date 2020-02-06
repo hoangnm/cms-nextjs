@@ -1,3 +1,4 @@
+import React from "react";
 import ReactTags from "react-tag-autocomplete";
 
 const Tags = ({ tags, suggestions, onDelete, onAddition }) => {

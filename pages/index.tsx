@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import useSWR from "swr";
-import Header from "../components/Header";
-import { getPosts } from "../apis/cms";
+import Header from "../client/components/Header";
+import { getPosts } from "../client/apis/cms";
 
 const DateText = ({ date }) => {
   return <span>{new Date(date).toLocaleDateString()}</span>;
