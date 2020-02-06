@@ -4,6 +4,7 @@ import { Formik, Field, useField } from "formik";
 import fetch from "isomorphic-unfetch";
 import ReactTags from "react-tag-autocomplete";
 import Header from "../components/Header";
+import { createPost, createSlug } from "../apis/cms";
 
 const TagsField = ({ name }) => {
   const [suggestions, setSuggestions] = useState([]);
@@ -12,16 +13,6 @@ const TagsField = ({ name }) => {
     const result = await res.json();
     const slugs = result.map(item => ({ id: item._id, name: item.title }));
     setSuggestions(slugs);
-  };
-  const createTag = async title => {
-    const result = await fetch("http://localhost:3000/api/slugs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ title })
-    });
-    return result.json();
   };
   const [field, meta, helpers] = useField(name);
   const { value } = meta;
@@ -33,7 +24,7 @@ const TagsField = ({ name }) => {
   };
   const handleAddition = async tag => {
     if (!tag.id) {
-      const createdTag = await createTag(tag.name);
+      const createdTag = await createSlug(tag.name);
       const tag = { id: createdTag.id, name: createdTag.title };
       setSuggestions([...suggestions, tag]);
       const tags = [...value, tag];
@@ -190,21 +181,8 @@ const CreatePost = () => {
                 <Formik
                   initialValues={{ title: "", author: "", body: "", slugs: [] }}
                   onSubmit={async (values, { setSubmitting }) => {
-                    const body = {
-                      ...values,
-                      slugs: values.slugs.map(slug => slug.id)
-                    };
-                    await fetch("http://localhost:3000/api/posts", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json"
-                      },
-                      body: JSON.stringify(body)
-                    }).then(r => {
-                      console.log("done");
-                      setSubmitting(false);
-                      return r.json();
-                    });
+                    await createPost(values);
+                    setSubmitting(false);
                   }}
                 >
                   {({
