@@ -21,6 +21,14 @@ function PostContent({ content }) {
   return <p className="lead">{content}</p>;
 }
 
+const Slugs = ({ slugs = [] }) => {
+  return (
+    <p className="lead">
+      slugs <a href="#">{slugs.map(slug => slug.title).join(",")}</a>
+    </p>
+  );
+};
+
 const Post = ({ post }) => {
   return (
     <div>
@@ -30,6 +38,7 @@ const Post = ({ post }) => {
           <div className="col-md-8">
             <PostTitle title={post.title} />
             <PostAuthor author={post.author} />
+            <Slugs slugs={post.slugs} />
             <PostTime time={post.date} />
             <PostContent content={post.body} />
           </div>
