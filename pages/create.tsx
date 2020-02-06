@@ -48,6 +48,7 @@ const TagsField = ({ name }) => {
 };
 
 const CreatePost = () => {
+  const initialValues = { title: "", author: "", body: "", slugs: [] };
   return (
     <div>
       <Header />
@@ -58,10 +59,12 @@ const CreatePost = () => {
               <h5 className="card-header">Create a Post:</h5>
               <div className="card-body">
                 <Formik
-                  initialValues={{ title: "", author: "", body: "", slugs: [] }}
-                  onSubmit={async (values, { setSubmitting }) => {
+                  initialValues={initialValues}
+                  onSubmit={async (values, { setSubmitting, setValues }) => {
                     await createPost(values);
                     setSubmitting(false);
+                    setValues(initialValues);
+                    alert("Created a post successfully");
                   }}
                 >
                   {({ handleSubmit }) => (
