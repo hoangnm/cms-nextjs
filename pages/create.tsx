@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Formik, Field, useField } from "formik";
-import fetch from "isomorphic-unfetch";
 import Header from "../components/Header";
 import Tags from "../components/Tags";
-import { createPost, createSlug } from "../apis/cms";
+import { createPost, createSlug, getSlugs } from "../apis/cms";
 
 const TagsField = ({ name }) => {
   const [suggestions, setSuggestions] = useState([]);
   const fetchSlugs = async () => {
-    const res = await fetch("http://localhost:3000/api/slugs");
-    const result = await res.json();
-    const slugs = result.map(item => ({ id: item._id, name: item.title }));
+    const slugs = await getSlugs();
     setSuggestions(slugs);
   };
   const [field, meta, helpers] = useField(name);
