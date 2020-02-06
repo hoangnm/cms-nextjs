@@ -1,5 +1,11 @@
 import fetch from "isomorphic-unfetch";
 
+export const getPost = async (id: string) => {
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`);
+  const post = await res.json();
+  return post;
+};
+
 export const createPost = async data => {
   const body = {
     ...data,
@@ -23,7 +29,11 @@ export const createSlug = async title => {
     },
     body: JSON.stringify({ title })
   });
-  return result.json();
+  const data = await result.json();
+  return {
+    id: data._id,
+    name: data.title
+  };
 };
 
 export const getSlugs = async () => {

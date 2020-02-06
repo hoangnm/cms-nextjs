@@ -1,5 +1,5 @@
-import fetch from "isomorphic-unfetch";
 import Header from "../../components/Header";
+import { getPost } from "../../apis/cms";
 
 function PostTitle({ title }) {
   return <h1 className="mt-4">{title}</h1>;
@@ -41,8 +41,7 @@ const Post = ({ post }) => {
 
 Post.getInitialProps = async function(context) {
   const { id } = context.query;
-  const res = await fetch(`http://localhost:3000/api/posts/${id}`);
-  const post = await res.json();
+  const post = await getPost(id);
 
   return { post };
 };
