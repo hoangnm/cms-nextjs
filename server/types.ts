@@ -5,3 +5,8 @@ export interface PostModel {
   body: string;
   slugs: string[];
 }
+
+export interface SlugModel {
+  _id?: string;
+  title: string;
+}
