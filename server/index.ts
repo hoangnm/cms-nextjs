@@ -5,9 +5,12 @@ import mongoose from "mongoose";
 import postsApi from "./apis/posts";
 import slugsApi from "./apis/slugs";
 
+require("dotenv").config();
+
 const configs = {
   PORT: 3000,
-  NODE_ENV: process.env.NODE_ENV
+  NODE_ENV: process.env.NODE_ENV,
+  DB_HOST: process.env.DB_HOST
 };
 
 export const nextApplication = next({
@@ -30,21 +33,21 @@ export const httpServer = micro(
 );
 
 async function initMongo() {
-  console.log("Initialising MongoDB...");
   let success = false;
   let client;
   while (!success) {
     try {
-      client = await mongoose.connect("mongodb://localhost:27017/cms", {
-        useNewUrlParser: true
-      });
+      client = await mongoose.connect(
+        `mongodb://${configs.DB_HOST}:27017/cms`,
+        {
+          useNewUrlParser: true
+        }
+      );
       success = true;
     } catch {
-      console.log("Error connecting to MongoDB, retrying in 1 second");
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
-  console.log("MongoDB initialised");
   return client;
 }
 
@@ -52,7 +55,7 @@ async function init() {
   try {
     await initMongo();
     await nextApplication.prepare();
-    await httpServer.listen(configs.PORT, () => {
+    httpServer.listen(configs.PORT, () => {
       console.log(`> Ready on http://localhost:${configs.PORT}`);
     });
   } catch (err) {

@@ -11,7 +11,8 @@ module.exports = {
     sourceType: "module" // Allows for the use of imports
   },
   rules: {
-    "no-console": "error",
+    "no-console": "warn",
+    "no-await-in-loop": "warn",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
     "@typescript-eslint/no-var-requires": "off",
