@@ -15,4 +15,3 @@ export const createPost = async body => {
   await post.save();
   return post;
 };
-

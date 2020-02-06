@@ -3,6 +3,7 @@ import { get, post, router, withNamespace } from "microrouter";
 import next from "next";
 import mongoose from "mongoose";
 import postsApi from "./apis/posts";
+import slugsApi from "./apis/slugs";
 
 const configs = {
   PORT: 3000,
@@ -20,6 +21,10 @@ export const httpServer = micro(
       get("/:id", postsApi.getById),
       post("/", postsApi.create)
     ),
+    withNamespace("/api/slugs")(
+      get("/", slugsApi.getAll),
+      post("/", slugsApi.create)
+    ),
     get("/*", nextApplication.getRequestHandler())
   )
 );
@@ -30,7 +35,7 @@ async function initMongo() {
   let client;
   while (!success) {
     try {
-      client = await mongoose.connect("mongodb://mongo:27017/cms", {
+      client = await mongoose.connect("mongodb://localhost:27017/cms", {
         useNewUrlParser: true
       });
       success = true;
