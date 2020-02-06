@@ -22,9 +22,8 @@ const TagsField = ({ name }) => {
   const handleAddition = async tag => {
     if (!tag.id) {
       const createdTag = await createSlug(tag.name);
-      const tag = { id: createdTag.id, name: createdTag.title };
-      setSuggestions([...suggestions, tag]);
-      const tags = [...value, tag];
+      setSuggestions([...suggestions, createdTag]);
+      const tags = [...value, createdTag];
       setValue(tags);
     } else {
       const tags = [...value, tag];
