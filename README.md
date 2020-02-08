@@ -19,3 +19,5 @@ set DB_HOST=mongo in .env file then run
 ```bash
 docker-compose up
 ```
+
+The app url is http://localhost:3000.
